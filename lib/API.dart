@@ -3,7 +3,7 @@ import 'package:flutter_app1/Model/Post.dart';
 import 'package:http/http.dart' as http;
 
 Future<Post> fetchPostById(String? id) async {
-  String strAuth = "Basic bWFoZGk6TmVnaW4zNTI2ISE=";
+  String strAuth = "<YOUR_BASE64_USERNAME_PASSWORD>";
 
   final response = await http.get(
     Uri.parse("http://almasapps.ir/wp-json/wp/v2/posts/$id"),
@@ -21,7 +21,7 @@ Future<Post> fetchPostById(String? id) async {
 }
 
 Future<List<Post>?> fetchAllPosts() async {
-  String strAuth = "Basic bWFoZGk6TmVnaW4zNTI2ISE=";
+  String strAuth = "<YOUR_BASE64_USERNAME_PASSWORD>";
 
   final response = await http.get(
     Uri.http("almasapps.ir", "wp-json/wp/v2/posts/"),
@@ -45,7 +45,7 @@ Future<List<Post>?> fetchAllPosts() async {
 }
 
 Future<Post> createPost(String title, String content) async {
-  String strAuth = "Basic bWFoZGk6TmVnaW4zNTI2ISE=";
+  String strAuth = "<YOUR_BASE64_USERNAME_PASSWORD>";
 
   final response = await http.post(
       Uri.http("almasapps.ir", "wp-json/wp/v2/posts/"),
@@ -69,7 +69,7 @@ Future<Post> createPost(String title, String content) async {
 }
 
 Future<Post> DeletePost(String id) async {
-  String strAuth = "Basic bWFoZGk6TmVnaW4zNTI2ISE=";
+  String strAuth = "<YOUR_BASE64_USERNAME_PASSWORD>";
 
   final response = await http.delete(
     Uri.http("almasapps.ir", "wp-json/wp/v2/posts/$id"),
@@ -91,7 +91,7 @@ Future<Post> DeletePost(String id) async {
 
 
 Future<Post> UpdatePost(String id,String title,String content) async {
-  String strAuth = "Basic bWFoZGk6TmVnaW4zNTI2ISE=";
+  String strAuth = "<YOUR_BASE64_USERNAME_PASSWORD>";
 
   final response = await http.put(
     Uri.http("almasapps.ir", "wp-json/wp/v2/posts/$id"),
