@@ -15,7 +15,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: HomePage());
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+        home: HomePage());
   }
 }
 
@@ -51,7 +53,9 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text("دریافت اطلاعات از وردپرس"),),
       body: Center(
         child: FutureBuilder(
           future: fetchAllPosts(),
@@ -106,7 +110,7 @@ class _HomePageState extends State<HomePage> {
                             textAlign: TextAlign.justify,
                           ),
                           leading: Text(
-                            futureAlbum![index].date.toString(),
+                            futureAlbum![index].date.toString().substring(0,10),
                           ),
                         ),
                       ),

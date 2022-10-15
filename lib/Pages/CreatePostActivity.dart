@@ -9,6 +9,7 @@ class CreatePostActivity extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: HomePage(),
     );
   }
@@ -32,9 +33,9 @@ class _HomePageState extends State<HomePage> {
       future: futureResponse,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          return Text("Data Send Success");
+          return Text("اطلاعات با موفقیت ارسال شد");
         } else if (snapshot.hasError) {
-          return Text("Data Send Error");
+          return Text("خطا در ارسال اطلاعات");
         }
         return CircularProgressIndicator();
       },
@@ -45,37 +46,52 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Create Post"),
+        centerTitle: true,
+        title: Text("ایجاد پست جدید"),
       ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextField(
-                controller: txtTitle,
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(), labelText: "Title")),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextField(
-                controller: txtContent,
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(), labelText: "Content")),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ElevatedButton(
-              child: Text("Create Post"),
-              onPressed: () {
-                setState(() {
-                  futureResponse = createPost(txtTitle.text, txtContent.text);
-                });
-              },
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Directionality(
+                textDirection: TextDirection.rtl,
+                child: TextField(
+                    controller: txtTitle,
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(), labelText: "عنوان")),
+              ),
             ),
-          ),
-          futureResponse == null ? Text("") : futureResponseBuilder(),
-        ],
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Directionality(
+                textDirection: TextDirection.rtl,
+                child: TextField(
+                  minLines: 3,
+                  maxLines: 3,
+                  textDirection: TextDirection.rtl,
+                    controller: txtContent,
+                    decoration: InputDecoration(
+                      hintTextDirection: TextDirection.rtl,
+                        border: OutlineInputBorder(), labelText: "محتوا")),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ElevatedButton(
+                child: Text("ایجاد پست"),
+                onPressed: () {
+                  setState(() {
+                    futureResponse = createPost(txtTitle.text, txtContent.text);
+                  });
+                },
+              ),
+            ),
+            futureResponse == null ? Text("") : futureResponseBuilder(),
+          ],
+        ),
       ),
     );
   }
